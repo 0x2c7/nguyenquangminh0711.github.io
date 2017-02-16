@@ -1,8 +1,8 @@
 ---
 title:  "Introduction to the interval tree"
-date:   2013-11-10 10:18:00
+date:   2016-09-07
 layout: post
-description: Thriller Comedy Horror
+description: Initially introduction to Interval Tree data structure
 ---
 
 In this post, I'll show you some introduction to an advanged data structure called Interval Tree. Note that the word `advanged` here means that this data structure is used to solve a too specific kind of computer science problems. It doesn't do anything with the level of the developers. Don't worry, you don't need to be a ninja to read. I bet you will be surprised about how simple it is :)
