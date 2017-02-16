@@ -2,6 +2,7 @@ name: nguyenquangminh0711
 description: Research. Code. Follow my passion.
 meta_description: "nguyenquangminh0711 - Research. Code. Follow my passion."
 
+
 aboutPage: true
 
 markdown: kramdown
@@ -10,6 +11,7 @@ highlighter: rouge
 gems: [jekyll-paginate]
 paginate: 20
 baseurl: /
+rooturl: https://nguyenquangminh0711.github.io
 domain_name: 'nguyenquangminh0711.github.io'
 
 facebook_comments: 733223113511154
