@@ -15,6 +15,7 @@ rooturl: https://nguyenquangminh0711.github.io
 domain_name: 'nguyenquangminh0711.github.io'
 
 facebook_comments: 733223113511154
+google_analytics: 'UA-92088150-1'
 
 # Details for the RSS feed generator
 author:         'nguyenquangminh0711'
