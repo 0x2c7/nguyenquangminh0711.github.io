@@ -12,8 +12,7 @@ paginate: 20
 baseurl: /
 domain_name: 'nguyenquangminh0711.github.io'
 
-#disqus: false
-#disqus_shortname: 'your-disqus-shortname'
+facebook_comments: true
 
 # Details for the RSS feed generator
 author:         'nguyenquangminh0711'
