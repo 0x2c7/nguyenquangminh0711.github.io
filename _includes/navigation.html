@@ -1,9 +1,5 @@
 <nav class="main-nav">
-    {% if page.url != "/" %}
-        <a href="{{ site.baseurl }}"> <span class="arrow">←</span> Home </a>
-    {% endif %}
-
-    {% if page.url != "/about/" %}
-        <a href="{{ site.baseurl }}about">About </a>
-    {% endif %}
+  <a href="{{ site.baseurl }}">Home </a>
+  <a href="{{ site.baseurl }}about">About </a>
+  <a class="cta" href="{{ site.baseurl }}subscribe">Subscribe</a>
 </nav>
