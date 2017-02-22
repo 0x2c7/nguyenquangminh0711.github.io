@@ -2,9 +2,7 @@ name: nguyenquangminh0711
 description: Research. Code. Follow my passion.
 meta_description: "nguyenquangminh0711 - Research. Code. Follow my passion."
 
-
 aboutPage: true
-
 markdown: kramdown
 highlighter: rouge
 
@@ -14,7 +12,8 @@ baseurl: /
 rooturl: https://nguyenquangminh0711.github.io
 domain_name: 'nguyenquangminh0711.github.io'
 
-facebook_comments: 733223113511154
+#facebook_comments: 733223113511154
+disqus_comments: true
 google_analytics: 'UA-92088150-1'
 
 # Details for the RSS feed generator
