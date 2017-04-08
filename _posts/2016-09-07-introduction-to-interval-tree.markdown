@@ -5,7 +5,7 @@ layout: post
 description: Initially introduction to Interval Tree data structure
 ---
 
-In this post, I'll show you some introduction to an advanged data structure called Interval Tree. Note that the word `advanged` here means that this data structure is used to solve a too specific kind of computer science problems. It doesn't do anything with the level of the developers. Don't worry, you don't need to be a ninja to read. I bet you will be surprised about how simple it is :)
+In this post, I'll show you some introduction to an advanced data structure called Interval Tree. Note that the word `advanced` here means that this data structure is used to solve a too specific kind of computer science problems. It doesn't do anything with the level of the developers. Don't worry, you don't need to be a ninja to read. I bet you will be surprised about how simple it is :)
 
 I don't intend to write a science document. This post is just a post I wrote for myself to read later. I'm trying to explain the concept of Interval tree as simple as I could, based on what I researched about it. So, you could find tons of bugs inside. Please report / discuss with me to make it better.
 
@@ -66,7 +66,7 @@ How about caching into 2D array like above? Nah, think about `100_000 x 100_000 
 
 Wow, this is tough hah? To archive the problem requirement, we loop too much, for both query and updating. You must wish that we don't need to loop that much. If you look again at the above example, you will see that range `0..1` which is `[7, 9]` and range `7..9` which is `[5, 4, 0]` don't change at all. So, the query result doesn't change if we process the query on those range. We could cache that. Unfortunately, there is not any operation that match exactly with the range we need to query. Let's find some way to walk around it.
 
-The problem requirement is too find the maximum elments. Recall the some arithmetical nature of maxinum operation. `Max(a, b) = a if a > b` and `Max(a, b) = Max(b, a)`. Hmm... Nothing interesting. We are working on range. How about the maxinum operation on three element? `Max(a, b, c) =  Max(a, Max(b, c))`. For element? `Max(a, b, c, d) =  Max(Max(a, b), Max(c, d))`. Oh hey! We could find the max of a range by spliting the range into two ranges, find the max of each range and compare those partial maxes to get the whole range's max. Let's apply for the above example.
+The problem requirement is too find the maximum elements. Recall the some arithmetical nature of maximum operation. `Max(a, b) = a if a > b` and `Max(a, b) = Max(b, a)`. Hmm... Nothing interesting. We are working on range. How about the maximum operation on three element? `Max(a, b, c) =  Max(a, Max(b, c))`. For element? `Max(a, b, c, d) =  Max(Max(a, b), Max(c, d))`. Oh hey! We could find the max of a range by splitting the range into two ranges, find the max of each range and compare those partial maxes to get the whole range's max. Let's apply for the above example.
 ```
 Max(A, 3, 9) = Max(Max(A, 3, 6), Max(A, 7, 9))
 ```
@@ -121,7 +121,7 @@ At the root node, we only have the information of the range max from index 0 to 
 
 ![Interval Tree Query Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-query2.jpg)
 
-After spliting, we approach the result, but we are still not there yet. Continue spliting the range of `Q1` into `Q3` and `Q4`, and the range of `Q2` into `Q5` and `Q6`. The final result will be `Q = Max( Max(Q3, Q4), Max(Q5, Q6) )`.
+After splitting, we approach the result, but we are still not there yet. Continue splitting the range of `Q1` into `Q3` and `Q4`, and the range of `Q2` into `Q5` and `Q6`. The final result will be `Q = Max( Max(Q3, Q4), Max(Q5, Q6) )`.
 
 ![Interval Tree Query Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-query3.jpg)
 
@@ -129,7 +129,7 @@ Oh wait a minute! Some thing is wrong with `Q3`. The node contains `Q3` manages 
 
 ![Interval Tree Query Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-query4.jpg)
 
-Finally, we got a 100% match. The `Q3` match 100% with its node. So, `Q3` is equal to the range max of its node. In this case, `Q3 = 6`, and `Q1 = Q3 = 6` too. We stop browsing `Q3`'s children nodes from now. In the oposite, `Q4` is still a mysterious, keep spliting deeper until we reach the 100% match, we got the full query tree. Obviously, `Q6 = 2`, `Q5 = 2`, `Q4 = 2` and `Q2 = 2`. Subsequently, `Q = Max(Q1, Q2) = Max(6, 2) = 6`. The full query operator is describe below:
+Finally, we got a 100% match. The `Q3` match 100% with its node. So, `Q3` is equal to the range max of its node. In this case, `Q3 = 6`, and `Q1 = Q3 = 6` too. We stop browsing `Q3`'s children nodes from now. In the opposite, `Q4` is still a mysterious, keep splitting deeper until we reach the 100% match, we got the full query tree. Obviously, `Q6 = 2`, `Q5 = 2`, `Q4 = 2` and `Q2 = 2`. Subsequently, `Q = Max(Q1, Q2) = Max(6, 2) = 6`. The full query operator is describe below:
 
 ![Interval Tree Query Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-query5.jpg)
 
@@ -183,7 +183,7 @@ Wow, it is so complicated, especially the update operators. It costs half of all
 ![Interval Tree Update Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-update3.jpg)
 
 
-There are 4 query operators and 2 update operators reaching the range `[3, 6]`. There are only two update operators reaching its child nodes. Is it a waste when we update its both left node and child node? The final result of the problem is to print out all the query operators' results. The update operators, in oposite, don't require any evidences to show that the array is updated. So, if the query operators only care about the range `[3, 6]`, not its children node, we could have a shortcut so that we both ensure the query results and save the update cost as much as we could by not updating non-query nodes. Go back to the example, the range `[3, 6]` is updated to value `10`. Two query operators match the range and return the query results. That range is updated to value `1`. Again, two query operators get the query results by 100% match. We come up with an idea: when updating, if the update range match 100% with the node range, cache that update value without browsing the children nodes, otherwise, continue browsing left and right child node of that node; in the recursive tree, update the range max of each node. To match with that idea, the query idea must be audited: starting with the root, if the node range match 100% with the query range, return the range max as the querying result, otherwise, migrate the current node's cache to its children, clear currnt node cache and continue to browse left and right node and return maximum values between left and right querying result. Hm.. It becomes more complicated now. The node of the tree is expanded with an extra attribute (pink rectangle in the assets/figures). By default, the cache attribute is null. Let's make it easier by returning to our example:
+There are 4 query operators and 2 update operators reaching the range `[3, 6]`. There are only two update operators reaching its child nodes. Is it a waste when we update its both left node and child node? The final result of the problem is to print out all the query operators' results. The update operators, in opposite, don't require any evidences to show that the array is updated. So, if the query operators only care about the range `[3, 6]`, not its children node, we could have a shortcut so that we both ensure the query results and save the update cost as much as we could by not updating non-query nodes. Go back to the example, the range `[3, 6]` is updated to value `10`. Two query operators match the range and return the query results. That range is updated to value `1`. Again, two query operators get the query results by 100% match. We come up with an idea: when updating, if the update range match 100% with the node range, cache that update value without browsing the children nodes, otherwise, continue browsing left and right child node of that node; in the recursive tree, update the range max of each node. To match with that idea, the query idea must be audited: starting with the root, if the node range match 100% with the query range, return the range max as the querying result, otherwise, migrate the current node's cache to its children, clear current node cache and continue to browse left and right node and return maximum values between left and right querying result. Hm.. It becomes more complicated now. The node of the tree is expanded with an extra attribute (pink rectangle in the assets/figures). By default, the cache attribute is null. Let's make it easier by returning to our example:
 
 ![Interval Tree full]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-full.jpg)
 
@@ -203,7 +203,7 @@ When process query operator `Max(A, 3, 9)`, something fun happens. Following the
 
 ![Interval Tree full]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-update-full4.jpg)
 
-The update cache is now useless because we want the inside result. So, we clear this cache and update all the elements inside. However, because update action is costly and we are not sure we need all the elements between this range, we choose a smarter approach. Look at that node, we are sure that all the elements inside the range in the left node and the right node have the same value with the cache. Subsequently, we create the cache for both left node and right node. The value of those caches are the same as the value of the cache in parent node. This action is temperarily called cache migration. After this action, we continue the querying operator.
+The update cache is now useless because we want the inside result. So, we clear this cache and update all the elements inside. However, because update action is costly and we are not sure we need all the elements between this range, we choose a smarter approach. Look at that node, we are sure that all the elements inside the range in the left node and the right node have the same value with the cache. Subsequently, we create the cache for both left node and right node. The value of those caches are the same as the value of the cache in parent node. This action is temporarily called cache migration. After this action, we continue the querying operator.
 
 ![Interval Tree full]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-update-full5.jpg)
 
