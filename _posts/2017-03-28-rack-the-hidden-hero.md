@@ -3,6 +3,7 @@ title:  "Rack, the hidden hero"
 date:   2017-03-28
 layout: post
 description: Everything you need to know about Rack
+draft: 1
 ---
 
 You are reading this blog, I guess you are a Ruby (Ruby on Rails) developer, or at least you used to touch the Rails framework, right? So, perhaps you used to hear some terms like "framework based on Rack" or "server for Rack application", etc. Yes, we are talking about this [Rack](https://rack.github.io) in the Ruby world. I believe that there aren't many people working with Rack in usual. Neither do I. To be honest, the last thing I did with Rack is to config a web server and add some bunch of low-level routing. However, I realize that Rack is an elegant and beautiful underneath any Ruby web frameworks. Researching Rack provides me a lot of knowledge about Ruby and deep understanding about how web framework (like Rails) works from scratch. This blog post is a place for me to note about everything I learned. If you have any question for me, please don't hesitate to comment. I really appreciate <3
