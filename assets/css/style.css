@@ -654,3 +654,14 @@ h2.month {
   font-size: 13px;
   display: inline-block;
 }
+
+.draft-badge {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: orange;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 13px;
+}
