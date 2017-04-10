@@ -646,13 +646,16 @@ h2.month {
 	.post h2 { font-size:20px; }
 }
 
-.highlighter-rouge {
-  padding: 2px 7px;
-  background-color: #272b2d;
-  color: #fdfdfd;
+div.highlighter-rouge {
+  margin-bottom: 20px;
+}
+
+code.highlighter-rouge {
+  display: inline-block;
+  padding: 2px 5px;
+  background-color: #eaeaea;
   border-radius: 5px;
   font-size: 13px;
-  display: inline-block;
 }
 
 .draft-badge {

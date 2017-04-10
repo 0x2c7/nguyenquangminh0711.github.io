@@ -41,5 +41,11 @@
     ga('create', '{{ site.google_analytics }}', 'auto');
     ga('send', 'pageview');
   </script>
+  <script>
+    var codes = document.querySelectorAll('pre.highlight');
+    for (var i = 0; i < codes.length; i++) {
+      hljs.highlightBlock(codes[i]);
+    }
+  </script>
 </body>
 </html>
