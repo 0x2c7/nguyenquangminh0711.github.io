@@ -1,9 +1,8 @@
 ---
-title:  "Rack, the hidden hero"
+title:  "Rack, the hidden hero - Part 1"
 date:   2017-03-28
 layout: post
-description: Everything you need to know about Rack
-draft: 1
+description: Everything you need to know about Rack (Part 1)
 ---
 
 You are reading this blog, I guess you are a Ruby (Ruby on Rails) developer, or at least you used to touch the Rails framework, right? So, perhaps you used to hear some terms like "framework based on Rack" or "server for Rack application", etc. Yes, we are talking about this [Rack](https://rack.github.io) in the Ruby world. I believe that there aren't many people working with Rack in usual. Neither do I. To be honest, the last thing I did with Rack is to config a web server and add some bunch of low-level routing. However, I realize that Rack is an elegant and beautiful underneath any Ruby web frameworks. Researching Rack provides me a lot of knowledge about Ruby and deep understanding about how web framework (like Rails) works from scratch. This blog post is a place for me to note about everything I learned. If you have any question for me, please don't hesitate to comment. I really appreciate <3
@@ -26,65 +25,3 @@ This next example is just like above except the Warden middleware stops the envi
 
 ![Rack working flow 2]({{ site.url  }}/assets/figures/rack-the-hidden-hero/work-flow-2.jpg)
 
-# Middleware, the heart of Rack
-
-# How does Rack build your application?
-
-NotImplementedError
-
-
-Let's open a random Rails application and look at the `config.ru` file. For example: this is a typical Rails application's `config.ru` file. The `.ru` extension of the file comes from `rackup`. As its name, this file stores the configurations that define how your web application is structured.
-
-```ruby
-require_relative 'config/environment'
-
-run Rails.application
-```
-
-Since Rails does all the thing, the configuration file of a Rails application is super simple and obvious. This is a more complicated configuration (disclamer: I know, this is ugly. I won't use it in production)
-
-```ruby
-use ExceptionLoggingMiddleware
-
-map '/' do
-  use ApiCORSMiddleware
-
-  map '/v1' do
-    run ApiApplication
-  end
-end
-
-run MainApplication
-```
-
-To define the structure of your web application, Rack provides us some DSLs: `use`, `map` or `run`. The details of those DSL will be described in next few sections. In fact, you can add some bunch of Ruby codes redirectly or require from other files / gems. This makes the `config.ru` file flexible and easy to config. However, it also makes it hard to mantain if you are not careful. The most important command here is the `run` command. It decides who takes responsibility to handle the logic for a branch of requests or all requests. That is where your favourite framework takes place. All the frameworks implement an interface to plug into the Rack application. This interface is called **middleware**.
-
-# Web server layer
-
-NotImplementedError
-
-<!-- # Build app from config.ru -->
-<!--   Top - down strategy -->
-<!--  -->
-<!--   If meets map => add to mapping -->
-<!--   If meets use -->
-<!--     If mapping exists -->
-<!--       Convert the mapping to URLMap middleware and add to use list -->
-<!--     Add the current middleware to use list -->
-<!--   If meets run -->
-<!--     Set main handler for that builder partial -->
-<!--  -->
-<!--   Final build step: -->
-<!--     - If mapping exists. Create URLMap wrapp main handler -->
-<!--     - Otherwise, use main handler directly -->
-<!--  -->
-<!--     Attach that result into the middlewares -->
-
-<!-- # Inject default middlewares -->
-<!--   Rack::ContentLength -->
-<!--   Rack::Chunked -->
-<!--   Rack::CommonLogger -->
-<!--   Rack::ShowExceptions -->
-<!--   Rack::Lint -->
-<!--   Rack::TempfileReaper -->
-<!--   Rack provides me a lot knowledges about the hidden world b -->
