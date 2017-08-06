@@ -8,7 +8,7 @@ highlighter: rouge
 
 plugins: [jekyll-paginate]
 paginate: 20
-baseurl: /
+baseurl: http://nguyenquangminh.info/
 rooturl: https://nguyenquangminh0711.github.io
 domain_name: 'nguyenquangminh0711.github.io'
 
