@@ -9,7 +9,7 @@ In this post, I'll show you some introduction to an advanced data structure call
 
 I don't intend to write a science document. This post is just a post I wrote for myself to read later. I'm trying to explain the concept of Interval tree as simple as I could, based on what I researched about it. So, you could find tons of bugs inside. Please report / discuss with me to make it better.
 
-## Let's get started
+# Let's get started
 Before we jump suddenly into the definition. Let's just start with this simple problem that all developers solved at the beginning their entire carrers: find the maxximum element of an array. For example and result:
 ```
 A = [7, 9, 4, 3, 6, 2, 3, 5]
@@ -36,7 +36,7 @@ Max(A, 0, 7) = Max(A) = 9
 ```
 This one is totally, different right? You may come up with many solutions for this. You can think about building a cache 2D array at the beginning to store all the maximum values. That's a good solution. With some dynamic programming technique, it becomes `O(n^2)`. But it doesn't work if we increase the number of `n` to about `100_000`. Before you found a good solution for this. Let's make it more difficult :D
 
-## Ultimate problem
+# Ultimate problem
 Given an array `A` with `n` elements and `m` set of number (`n <= 100_000`, `m <= 1_000_000`). Each set of number has two format:
 * `0 i j`: print out the maximum elements with index from `i` to `j`
 * `1 i j k`: set all elements with index from `i` to `j` to the value `k`
@@ -72,7 +72,7 @@ Max(A, 3, 9) = Max(Max(A, 3, 6), Max(A, 7, 9))
 ```
 The range `7..9` doesn't change from the beginning to the end. We should cache that part and find just loop to find the maximum from `3..6`. That seems legit!  Split the entire array into two ranges, each range is splitted into smaller ranges and so on. Oh wait. Isn't that the concept of **binary tree**? Yup. We can solve the problem by setting up a special type of binary tree. Each node will manage a range `i..j`. In this context, it is reasonal to choose let two child ranges equal. So, left node manages `i..(i + j) / 2` and right node manages `(i + j) / 2 + 1 .. j`. This new kind of tree is called **Interval Tree** (usually ambiguous with its coursin **Segment Tree**, I'll discuss about this later). Obviously, the way array is splited into half leads to the fact that Interval Tree is a **balanced binary tree**. Each node has no children (leaf node) or two children (normal node).
 
-## A little more abstraction
+# A little more abstraction
 In fact, when working with pure computer science problems, people realize there are many ones which could be categorized into the same class of this problem. For example: instead of finding min or max, we need to find the sum of a range in an array; or we need to find out how many elements in a range which are bigger than a number, etc.
 Step back a little while and think of the similarities of mentioned problems, we can easily conduct some abstract natures for the union set of problem:
 * Initially given some array A with pre-defined values for each element
@@ -82,9 +82,7 @@ Step back a little while and think of the similarities of mentioned problems, we
 
 Interval tree was born to solve this kind of problems efficiently. Although each problem could have better exclusive optimised solution, the Interval Tree is more abstract, reuseable and doesn't require further research time. Subsequently, if you don't need a specially strict solution for those problems, I think interval tree is great enough for most of the cases.
 
-## Problem solved
-
-### Building the tree
+# Building the tree
 It's time to go back to our problem. From the array `A = [7, 9, 4, 3, 6, 2, 3, 5, 4, 0]`, we build the Interval Tree in which the root node is the whole array. Left node is the segment `[7, 9, 4, 3, 6]` and the right node is `[2, 3, 5, 4, 0]`. Apply the same rule for those nodes until we reach leaf node, which contains only one element. Beside the managed range, each node contains one more attribute called `Range Max`, which is the maximum element of the managed range. Initally, only the leaf node has range max value which is the only value of the managed range. Recursively building the tree from the root node to the leaf node, we got this tree:
 
 ![Interval Tree Building]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree1.jpg)
@@ -112,7 +110,7 @@ Each node of an Interval Tree must have 0 children node (leaf node) or 2 childre
 
 The time complexity of the building tree operator is `O(n * log n)`
 
-### Query operation
+# Query operation
 To solve the query operation, for example: `Max(A, 3, 5)`, we follow the basic idea: starting with the root, if the node range match 100% with the query range, return the range max as the querying result, otherwise, continue to browse left and right node and return maximum values between left and right querying result. Go back to our current example, we illustrate it by the following figure. The red line is the query result we want to find. It starts at the beginning of the query range and ends at corresponding one.
 
 ![Interval Tree Query Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-query1.jpg)
@@ -162,7 +160,7 @@ Yup, 4 steps vs 8 steps. Interval Tree wins! The bigger the data is, the more th
 
 The time complexity of the query operator is `O(log n)`
 
-### Update operator
+# Update operator
 Wow, finally we reach the final piece of the puzzlee: update operator. Through the above query operator explanation, perhaps, the first solution popping up in your head is that starting with the root, if the node is leaf node, update the real value of the array and the range max of the node, otherwise, continue to browse left and right node right? Let's follow that solution. The blue line is the range we need to update all elements. With the operator `Update(A, 3, 4, 10)`, starting with the root node, it is not leaf node, browse left and right, go back later. After reaching the leaf node, at each back-recursive step, we update the range max of each node just like when building the tree. Finally, we got the updated Interval tree.
 
 ![Interval Tree Update Operation]({{ site.url  }}/assets/figures/introduction-to-interval-tree/tree-update1.jpg)
@@ -239,7 +237,7 @@ Soon, we get the query result, which is `4`. This is the whole update query proc
 ```
 The time complexity of the update operator is `O(log n)`
 
-## Implementation
+# Implementation
 I implemented full problem with available source code at [Interval Tree implementation in ruby]({{ site.url  }}/assets/figures/introduction-to-interval-tree/interval_tree.rb). Note: honestly, this code is for demonstration only because Ruby is not a good language for competitive programming. If you submit this source code to online judgement websites such as codeforces, it could not be compared to compiled static typed language like C++/Java.
 
 Benchmark (array size = 50000, number of commands = 100000)

@@ -53,9 +53,7 @@ The above flow has something different, in which I think it is much more better 
   - No more API post / get boiler plate.
   - The availability of stream. (Gonna talk about this later. But it is awesome).
 
-# Simple demo
-
-## Simple demo with plain Ruby
+# Simple demo with plain Ruby
 
 To make everything easy at the beginning. Let's written everything in plain Ruby. To get started. You need to create 3 folders and corresponding blank files:
 
@@ -156,7 +154,7 @@ end
 
 The real logic is just this line: `result = stub.load_member(MemberRequest.new(id: rand(1..1000)))`. It sends a `MemberRequest` instance which contains a random id number to the server. Then, it received a `MemberReply` response. So that we could access the attributes directly like above. And now we start the client with `ruby client.rb`. And hooya. Everything works like charm.
 
-## Apply gRPC in Rails project
+# Apply gRPC in Rails project
 
 Basically, Rails is just a framework of Ruby. So, everything works the same as it does with plain Ruby. The addtional part is that we need to initialize Rails before starting the RPC server so that it could use everything in the rails project. It is this simple:
 
@@ -176,23 +174,26 @@ end
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 ```
 
-## Applying RPC into my company's project
+# Applying RPC into my company's project
 
 Microservices and gRPC is a new approach for my company to move the whole system to. The previous stack depends on Heroku. They provides many useful utilities that save us a lot of cost at the beginning. As the time flies, it is too hard for the expansion because Heroku provoked a lot of freedom. Subsequently, we are moving our infrastructure to AWS. At first, the new features are implemented in new services. Then, we gradually extract the modules in the main Monolith application into services. At the moment, we are just at the beginning step. So, Heroku application is still there for most requests. What we are setting up here is one RPC server to gather information from main app. It is actually in our AWS cluster. It connect to a replication of Heroku's database and totally isolated with the main application. Every other services call RPC requests to this RPC server. In the main Heroku application, it delegates stuff to services via RPC too. It is fortune that Heroku allows external RPC call. So everything is fine until now. And we got some interesting benchmarking.
 
 ### Services to Services
-- Average request: 1.5 ms
-- Median request: 1.2 ms
-- Fasted request: 0.5 ms
-- Slowest request: 7 ms
-- 95% request time: 4ms
+
+  - Average request: 1.5 ms
+  - Median request: 1.2 ms
+  - Fasted request: 0.5 ms
+  - Slowest request: 7 ms
+  - 95% request time: 4ms
+
 
 ### Heroku main app to services
-- Average request: 6.5 ms
-- Median request: 7 ms
-- Fasted request: 3 ms
-- Slowest request: 20 ms
-- 95% request time: 7 ms
+
+  - Average request: 6.5 ms
+  - Median request: 7 ms
+  - Fasted request: 3 ms
+  - Slowest request: 20 ms
+  - 95% request time: 7 ms
 
 The RPC calls from Heroku main app is slow because it is out of our control. We could not do anything about it. This result is acceptable for us. So, perhaps we'll follow RPC for production :)
 
