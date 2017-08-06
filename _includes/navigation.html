@@ -1,4 +1,4 @@
-<nav class="main-nav">
+<nav class="main-nav {% if page.url == "/"%}highlight{% endif %}{% if page.url == "/about/"%}highlight{% endif %}{% if page.url == "/subscribe/"%}highlight{% endif %}">
   <a href="{{ site.baseurl }}">Home </a>
   <a href="{{ site.baseurl }}about">About </a>
   <a class="cta" href="{{ site.baseurl }}subscribe">Subscribe</a>

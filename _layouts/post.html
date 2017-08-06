@@ -5,7 +5,7 @@ archive: true
 
 <article class="post">
     <header>
-      <h1>{{ page.title }}</h1>
+      <h1 class="title">{{ page.title }}</h1>
       {% if page.draft == 1 %}
       <div class="draft-badge">Draft</div>
       {% endif %}
@@ -15,55 +15,7 @@ archive: true
         {{content}}
     </section>
 </article>
-<footer id="post-meta" class="clearfix">
-    <a href="http://twitter.com/{{ site.authorTwitter }}">
-        <img class="avatar" src="{{ site.baseurl }}assets/images/avatar.jpg">
-        <div>
-            <span class="dark">{{ site.author }}</span>
-            <span>{{ site.description }}</span>
-        </div>
-    </a>
-</footer>
 
-<!-- Facebook comments -->
-{% if site.facebook_comments %}
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=733223113511154";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-  <div class="fb-comments" data-href="{{ site.rooturl }}{{ page.url }}" data-width="100%" data-numposts="100"></div>
-{% endif %}
-
-{% if site.disqus_comments %}
-<div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "{{ site.rooturl }}{{ page.url }}";
-    this.page.identifier = "{{ page.url }}";
-  };
-
-  (function() { // DON'T EDIT BELOW THIS LINE
-  var d = document, s = d.createElement('script');
-  s.src = '//nguyenquangminh0711.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-{% endif %}
-
-<!-- Archive post list -->
-{% if page.archive %}
-    <ul id="post-list" class="archive readmore">
-        <h3>Read more</h3>
-        {% for post in site.posts %}
-            <li>
-                <a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}">{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% include post-share.html %}
+{% include post-facebook.html %}
+{% include post-disqus.html %}

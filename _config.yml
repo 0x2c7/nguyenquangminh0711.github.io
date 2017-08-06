@@ -1,12 +1,12 @@
-name: nguyenquangminh0711
-description: Hello, this is the blog of a nerdy guy
-meta_description: "nguyenquangminh0711 - Hello, this is the blog of a nerdy guy"
+name: Minh's Notebook
+description: Hi there, welcome to my blog. I am a guy who is striving for knowledge and trying to learn as much as I can everyday. This is a place I store the interesting things I found on that path. Happy reading and don't hesitate to leave me some comments 💪
+meta_description: "Minh's Notebook"
 
 aboutPage: true
 markdown: kramdown
 highlighter: rouge
 
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 paginate: 20
 baseurl: /
 rooturl: https://nguyenquangminh0711.github.io
@@ -17,9 +17,9 @@ disqus_comments: true
 google_analytics: 'UA-92088150-1'
 
 # Details for the RSS feed generator
-author:         'nguyenquangminh0711'
+author: "Minh's notebook"
 
-permalink:       /:year/:month/:title/
+permalink: /:year/:month/:title/
 
 defaults:
     -
