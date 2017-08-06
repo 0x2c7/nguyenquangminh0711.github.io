@@ -8,8 +8,8 @@ highlighter: rouge
 
 plugins: [jekyll-paginate]
 paginate: 20
-baseurl: http://nguyenquangminh.info/
-rooturl: https://nguyenquangminh0711.github.io
+baseurl: /
+rooturl: http://nguyenquangminh.info
 domain_name: 'nguyenquangminh0711.github.io'
 
 #facebook_comments: 733223113511154
