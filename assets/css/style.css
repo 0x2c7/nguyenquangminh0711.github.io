@@ -11,6 +11,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 .hidden { display: none; }
 
 /* Icons */
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 @font-face {
 	font-family: 'icons';
 		src: url('../fonts/icons.eot');
@@ -84,9 +85,6 @@ a,
 
 ul 	{ margin:0; padding:0; }
 li	{ list-style-type:circle; list-style-position:inside; }
-
-/* Line Height */
-#post-body, p { line-height:1.7; }
 
 b, strong { font-weight: 500;
   color: #1E2025; }
@@ -426,10 +424,19 @@ nav.main-nav a.cta {
 
 }
 
+#post-body p {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.5;
+  font-size: 1.2em;
+  color: #666;
+  text-align: justify;
+}
+
 .post h1 {
+	margin-top: 20px;
 	margin-bottom: 20px;
 	color: #222;
-	font: 300 32px/1.4em "Helvetica Neue", Helvetica,Arial,sans-serif;
+	font: 400 40px/1.4em "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 .post h1.title {
@@ -568,8 +575,8 @@ div.highlighter-rouge {
 
 code.highlighter-rouge {
   display: inline-block;
-  padding: 2px 5px;
+  padding: 5px 7px;
   background-color: #eaeaea;
   border-radius: 5px;
-  font-size: 13px;
+	font: 0.7em/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

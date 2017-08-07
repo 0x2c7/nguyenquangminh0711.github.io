@@ -181,8 +181,7 @@ end
 run NotFoundHandler.new
 ```
 
-Our `CensorMiddleware` middleware before two `Rack::Routes` middlewares, so whenever the response is generated, it steals and modifies the contents before sending back to the client.
-
-Internally, you must be surprised about how Rack structure the middlewares. In my opinion, it is a genious architecture. Let's draw a diagram for above application.
+Our `CensorMiddleware` middleware before two `Rack::Routes` middlewares, so whenever the response is generated, it steals and modifies the contents before sending back to the client. Internally, you must be surprised about how Rack structure the middlewares. The following diagram demonstrates how everything works with middleware
 
 ![Middleware diagram]({{ site.url  }}/assets/figures/rack-the-hidden-hero/middleware-diagram.jpg)
+
