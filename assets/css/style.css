@@ -447,6 +447,7 @@ nav.main-nav a.cta {
   color: #666;
   text-align: justify;
   max-width: 800px;
+  width: 100%;
   display: inline-block;
 }
 
@@ -646,7 +647,6 @@ nav.main-nav a.cta {
 
 #post-share .author {
   float: left;
-  margin-top: 20px;
   display: flex;
   align-items: center;
 }

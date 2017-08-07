@@ -186,3 +186,36 @@ Our `CensorMiddleware` middleware before two `Rack::Routes` middlewares, so when
 {:.full-image}
 ![Middleware diagram]({{ site.url  }}/assets/figures/rack-the-hidden-hero/middleware-diagram.jpg)
 
+ Internally, the middleware chain object (or Rack application) is kinda recursive object instead of an array of middlewares. One middleware stores the reference to mext middleware. A typcial middleware has three parts: audit the environment variable, call next middleware with the audited environment and audit the response from the next middleware. In case of special middleware like `Rack::Routes`, more than one middleware are stored and called based on the condition. The leaves of the tree are the special middlewares that generate the real response for the request. To achieve that structure, all the middlewares are initialized in reversed order. For example, in above code snippet, we got a list of middlewares:
+
+ ```ruby
+ middlewares = [
+  CensorMiddleware,
+  Rack::Routes, # anime
+  Rack::Routes, # manga
+  NotFoundHandler
+ ]
+ ```
+
+Rack builds the middleware tree by a simple mechamism:
+
+```ruby
+chain = middlewares.pop
+middlewares.each_reverse do |middleware_klass|
+  chain = middleware_klass.new(chain)
+end
+```
+
+This middleware hierachy is built by evaluate the `config.ru` file. `map`, `use`, `run` keywords are actually the methods of the evaluator object. I won't talk more about this. You can dig more details about this by reading the Rack source code.
+
+# Conclusion
+
+Hope that after this blog, you would have an overview about the great Rack framework. In detail, there are much more interesting things about the implementation of Rack. Besides, there are some bunch of good Rack plugins worth reading, such as Warden, Devise, etc. and the Rack-based web framework such as Sinatra, Roda, Hanami, etc. I recommend you to download and read the source code of the following projects.
+
+- [Rack](https://github.com/rack/rack)
+- [Warden](https://github.com/hassox/warden)
+- [Devise](https://github.com/plataformatec/devise)
+- [Sinatra](http://www.sinatrarb.com/)
+- [Roda](https://github.com/jeremyevans/roda)
+
+Those resources would help you understand clearly and deeply about the Ruby eco-sytem and enlarge your Ruby knowlege a lot. Good luck and happy coding 😘
