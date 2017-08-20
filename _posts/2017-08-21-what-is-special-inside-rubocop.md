@@ -1,6 +1,6 @@
 ---
 title:  "What is special inside rubocop?"
-date:   2017-03-28
+date:   2017-08-21
 layout: post
 draft: 1
 description: "Rubocop is a popular linter and code analyzer for Ruby. It helps us prevent the code smells and unify the code styles in the whole code base. So, how does it produce such magic? Let's find out in my blog post: What is special inside rubocop?"
