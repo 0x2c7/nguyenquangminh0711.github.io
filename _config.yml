@@ -9,7 +9,7 @@ highlighter: rouge
 plugins: [jekyll-paginate]
 paginate: 20
 baseurl: /
-rooturl: http://nguyenquangminh.info
+rooturl: https://minh.guru
 domain_name: 'nguyenquangminh0711.github.io'
 
 #facebook_comments: 733223113511154
